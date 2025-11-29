@@ -42,19 +42,19 @@ After the initial build, you can now start generating new years and days.
 cargo run --bin new-day 2025 1 // this creates the year and 1st day module
 ```
 
-![cargo_run_new_day.png](images/cargo_run_new_day.png)
+![cargo_run_new_day.png](images/new_day_AFTER.png)
 
 This will:
 
-Create `aoc-lib/src/year2025/day01.rs` with a solution template.
+- Create `aoc-lib/src/year2025/day01.rs` with a solution template.
 
-Update `aoc-lib/src/year2025/mod.rs` with the new day.
+- Update `aoc-lib/src/year2025/mod.rs` with the new day.
 
-Add `pub mod year2025`; to `aoc-lib/src/lib.rs` (if it’s a new year).
+- Add `pub mod year2025`; to `aoc-lib/src/lib.rs` (if it’s a new year).
 
-Regenerate `aoc-lib/src/registry_generated.rs`.
+- Regenerate `aoc-lib/src/registry_generated.rs` with routing logic for existing years/days.
 
-Create `input/year2025/day01.txt` as a placeholder.
+- Create a blank `input/year2025/day01.txt` file as a placeholder.
 
 
 ### Subequent days can be created with:
@@ -86,7 +86,7 @@ Example:
 
 Don't commit this value.
 
-Download input for a specific day:
+#### Download input for a specific day:
 `cargo run --bin aoc download 2025 1`
 
 ### Running Solutions  
@@ -244,10 +244,6 @@ Core: `anyhow`, `clap`, `colored`, `reqwest`, `criterion`
 
 Optional (commented out in `Cargo.toml`): `regex`, `itertools`, `ahash`, `atoi`, `once_cell`
 
-## Code Quality
-
-The workspace passes `cargo clippy --all-targets --all-features` without warnings to ensure a clean baseline.
-
 ## Troubleshooting
 Ideally, you never have to manually edit any files. But if you do, here are common errors and how to fix them.
 ### "file not found for module" - Year folder deleted
@@ -366,6 +362,11 @@ cargo run --bin aoc download 2024 1
 **Fix - Create manually:**
 Create `input/year2024/day01.txt` and paste your puzzle input.
 ___
+## Code Quality
+
+The workspace passes `cargo clippy --all-targets --all-features` without warnings to ensure a clean baseline.
+
+---
 
 ## License
 

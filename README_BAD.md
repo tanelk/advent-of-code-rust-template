@@ -76,7 +76,7 @@ This script:
 - prints the exact instructions of what to add to `aoc-lib/src/lib.rs`  
 
 
-![alt text](images/new_year.png)
+![alt text](images/new_year_BEFORE.png)
 
 ---
 
