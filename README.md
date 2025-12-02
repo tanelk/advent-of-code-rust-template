@@ -24,16 +24,7 @@ Clone and build:
 git clone https://github.com/sanctusgee/advent-of-code-rust-template.git
 cd advent-of-code-rust-template
 cargo build
-
-
-## Quick Start
-
-```bash
-# Clone and build
-git clone https://github.com/sanctusgee/advent-of-code-rust-template.git
-cd advent-of-code
-cargo build
-````
+```
 
 After the initial build, you can now start generating new years and days.
 
@@ -70,7 +61,7 @@ cargo run --bin new-day 2025 3 // creates day 3 module for 2025
 To download inputs, you need your AoC session cookie:
 
 - Log in to [adventofcode.com](https://adventofcode.com)
-- Open DevTools (varies by browser, usually right-click + Inspect or Inspect Element)
+- Open DevTools (varies by browser, usually right-click -> Inspect or Inspect Element)
 - Select the `Network` tab
 - Refresh the page - you should now see network requests appearing.
 - Click any request whose `Domain` is `adventofcode.com`.
@@ -106,7 +97,7 @@ cargo run --bin aoc list
 ## How It Works
 
 Solutions live in `aoc-lib/src/yearYYYY/dayDD.rs`. 
-The registry system wires this up so commands like: `cargo run --bin aoc run 2025 1` to the correct solver function.
+The registry system wires this up so commands like: `cargo run --bin aoc run 2025 1` map to the correct solver function.
 
 All years sit in the same codebase as separate modules. You can bounce between:
 
@@ -122,18 +113,7 @@ Rust’s incremental compilation means only the files you change are recompiled,
 
 Shared utilities (parsers, grid helpers, regex helpers, etc.) live in aoc-lib/src/utils/ and can be reused across all years.
 
----
-
-### Automatic Registry Management
-
-When you run `cargo run --bin new-day 2025 1`, it:
-1. Creates `aoc-lib/src/year2025/day01.rs` with a solution template
-2. Updates `aoc-lib/src/year2025/mod.rs` to register the new day
-3. Adds `pub mod year2025;` to `aoc-lib/src/lib.rs` (if it's a new year)
-4. Regenerates `aoc-lib/src/registry_generated.rs` with routing logic
-5. Creates `input/year2025` directory as a placeholder.
-
-No manual editing required. The registry stays in sync with your file structure.
+Automatic Registry Management: no manual editing required. The registry stays in sync with your file structure.
 
 ## Workspace Layout
 
@@ -207,6 +187,8 @@ fn solve_part2(_input: &str) -> Result<impl std::fmt::Display> {
 }
 ```
 
+---
+
 ## Commands reference
 
 ```bash
@@ -228,6 +210,8 @@ cargo run --bin registry-tool
 
 
 Input loading, error handling, and output formatting are already wired up. Just implement the two solver functions.
+
+---
 
 ## Testing & Benchmarking
 
