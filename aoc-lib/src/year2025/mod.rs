@@ -5,6 +5,12 @@ use anyhow::Result;
 
 mod day01;
 mod day03;
+mod day04;
+
 
 pub const DAYS: &[(&str, fn() -> Result<()>)] =
-    &[("1", day01::solve), ("3", day03::solve)];
+&[
+    ("1", day01::solve),
+    ("3", day03::solve),
+    ("4", day04::solve),
+];
