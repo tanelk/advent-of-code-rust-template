@@ -5,9 +5,4 @@ use anyhow::Result;
 
 mod day01;
 
-
-
-pub const DAYS: &[(&str, fn() -> Result<()>)] =
-&[
-    ("1", day01::solve),
-];
+pub const DAYS: &[(&str, fn() -> Result<()>)] = &[("1", day01::solve)];

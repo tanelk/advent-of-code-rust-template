@@ -14,7 +14,9 @@ pub struct SolutionRegistry;
 
 // Helper: convert DAYS entries like ("01", solver) to Vec<u8>
 fn days_to_u8(days: &[DayEntry]) -> Vec<u8> {
-    days.iter().filter_map(|(d, _)| d.parse::<u8>().ok()).collect()
+    days.iter()
+        .filter_map(|(d, _)| d.parse::<u8>().ok())
+        .collect()
 }
 
 // Helper: find solver for a given day in a year's DAYS

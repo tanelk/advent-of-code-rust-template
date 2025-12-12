@@ -23,10 +23,10 @@ pub fn load_input(year: u16, day: u8) -> Result<String> {
             day
         ));
     }
-    std::fs::read_to_string(&path)
-        .with_context(|| format!("Failed to read input file: {}", path.display()))
+    std::fs::read_to_string(&path).with_context(|| {
+        format!("Failed to read input file: {}", path.display())
+    })
 }
-
 
 // Load input file as lines
 pub fn load_input_lines(year: u16, day: u8) -> Result<Vec<String>> {
@@ -94,8 +94,9 @@ pub fn ensure_input(year: u16, day: u8) -> Result<String> {
     }
 
     // Save to file
-    std::fs::write(&path, &content)
-        .with_context(|| format!("Failed to write input to {}", path.display()))?;
+    std::fs::write(&path, &content).with_context(|| {
+        format!("Failed to write input to {}", path.display())
+    })?;
 
     Ok(content)
 }
@@ -120,14 +121,19 @@ where
                 anyhow::bail!("Line {} has invalid format", i + 1);
             }
 
-            let first = parts[0].trim().parse::<T>()
-                .context(format!("Failed to parse first part on line {}", i + 1))?;
+            let first = parts[0].trim().parse::<T>().context(format!(
+                "Failed to parse first part on line {}",
+                i + 1
+            ))?;
 
             let second = parts[1]
                 .split_whitespace()
                 .map(|s| s.parse::<U>())
                 .collect::<Result<Vec<_>, _>>()
-                .context(format!("Failed to parse second part on line {}", i + 1))?;
+                .context(format!(
+                    "Failed to parse second part on line {}",
+                    i + 1
+                ))?;
 
             Ok((first, second))
         })

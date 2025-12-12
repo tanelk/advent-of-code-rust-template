@@ -46,9 +46,11 @@ fn main() -> Result<()> {
 
 fn run_solution(year: u16, day: u8) -> Result<()> {
     if !(2015..=2099).contains(&year) {
-        anyhow::bail!("Year must be between 2015 and 2099 (Advent of Code years)");
+        anyhow::bail!(
+            "Year must be between 2015 and 2099 (Advent of Code years)"
+        );
     }
-    
+
     // ToDo: hardcoded: Starting 2025, AoC is now only 12 days
     //       intentionally leaving range of 1 to 25 so we can still use code for previous years
     //     **  In future, I'll figure out a way to create a dynamic variable
@@ -115,9 +117,11 @@ fn list_solutions(year_filter: Option<u16>) -> Result<()> {
 
 fn download_input(year: u16, day: u8) -> Result<()> {
     if !(2015..=2099).contains(&year) {
-        anyhow::bail!("Year must be between 2015 and 2099 (Advent of Code years)");
+        anyhow::bail!(
+            "Year must be between 2015 and 2099 (Advent of Code years)"
+        );
     }
-    
+
     // ToDo: hardcoded: Starting 2025, AoC is now only 12 days
     //       intentionally leaving range of 1 to 25 so we can still use code for previous years
     //     **  In future, I'll figure out a way to create a dynamic variable
@@ -128,8 +132,7 @@ fn download_input(year: u16, day: u8) -> Result<()> {
 
     println!(
         "{}",
-        format!("Downloading input for {} day {}", year, day)
-            .bright_cyan()
+        format!("Downloading input for {} day {}", year, day).bright_cyan()
     );
 
     let content = aoc_lib::utils::ensure_input(year, day)?;

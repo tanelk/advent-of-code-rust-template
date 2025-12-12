@@ -7,4 +7,3 @@ pub use input::{
     parse_lines, parse_lines_with_delimiter,
 };
 pub use output::SolutionOutput;
-

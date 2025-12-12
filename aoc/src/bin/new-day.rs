@@ -20,7 +20,9 @@ fn main() -> Result<()> {
 
     // Validate year range
     if !(2015..=2099).contains(&year) {
-        anyhow::bail!("Year must be between 2015 and 2099 (Advent of Code years)");
+        anyhow::bail!(
+            "Year must be between 2015 and 2099 (Advent of Code years)"
+        );
     }
 
     // Sanity check day range
@@ -45,18 +47,21 @@ fn main() -> Result<()> {
     }
 
     if let Some(parent) = solution_path.parent() {
-        fs::create_dir_all(parent)
-            .with_context(|| format!("failed to create directory {}", parent.display()))?;
+        fs::create_dir_all(parent).with_context(|| {
+            format!("failed to create directory {}", parent.display())
+        })?;
     }
 
     // Write a minimal day stub
-    fs::write(&solution_path, build_day_stub(year, day))
-        .with_context(|| format!("failed to write {}", solution_path.display()))?;
+    fs::write(&solution_path, build_day_stub(year, day)).with_context(
+        || format!("failed to write {}", solution_path.display()),
+    )?;
 
     // Create input directory (but not the day file - let download command handle that)
     let input_dir = PathBuf::from(format!("input/year{}", year));
-    fs::create_dir_all(&input_dir)
-        .with_context(|| format!("failed to create input directory {}", input_dir.display()))?;
+    fs::create_dir_all(&input_dir).with_context(|| {
+        format!("failed to create input directory {}", input_dir.display())
+    })?;
 
     // Register in `yearYYYY/mod.rs`
     register_new_day(year, day)?;
@@ -67,7 +72,7 @@ fn main() -> Result<()> {
         .args(["run", "--bin", "registry-tool"])
         .status()
         .context("Failed to run registry-tool")?;
-    
+
     if !status.success() {
         anyhow::bail!("registry-tool failed");
     }
@@ -75,7 +80,10 @@ fn main() -> Result<()> {
     // User guidance
     println!("\nCreated template for year {} day {}", year, day);
     println!("\nNext steps:");
-    println!("  1. Download input or Copy/paste input to: input/year{}/day{:02}.txt", year, day);
+    println!(
+        "  1. Download input or Copy/paste input to: input/year{}/day{:02}.txt",
+        year, day
+    );
     println!(
         "  2. Implement solution in: aoc-lib/src/year{}/day{:02}.rs",
         year, day
@@ -103,8 +111,9 @@ fn register_new_day(year: u16, day: u8) -> Result<()> {
     if !path.exists() {
         let scaffold = build_year_scaffold(year, day);
         if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)
-                .with_context(|| format!("failed to create directory {}", parent.display()))?;
+            fs::create_dir_all(parent).with_context(|| {
+                format!("failed to create directory {}", parent.display())
+            })?;
         }
         fs::write(&path, scaffold)
             .with_context(|| format!("failed to create {}", path.display()))?;
@@ -181,7 +190,6 @@ fn build_day_stub(year: u16, day: u8) -> String {
     )
 }
 
-
 // Integrate the new day into an existing `yearYYYY/mod.rs`
 fn integrate_day_into_year_file(src: &str, day: u8) -> Result<String> {
     let mut lines = src.lines().map(|s| s.to_string()).collect::<Vec<_>>();
@@ -207,7 +215,8 @@ fn integrate_day_into_year_file(src: &str, day: u8) -> Result<String> {
         merge_split_closing(&mut lines);
         close_idx = find_days_close(&lines, open_idx);
     }
-    let close_idx = close_idx.ok_or_else(|| anyhow!("could not locate DAYS array closing '];'"))?;
+    let close_idx = close_idx
+        .ok_or_else(|| anyhow!("could not locate DAYS array closing '];'"))?;
 
     // Insert the tuple just above the closing `];` if not already present
     let already_present = lines[(open_idx + 1)..close_idx]
