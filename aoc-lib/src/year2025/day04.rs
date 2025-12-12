@@ -18,8 +18,8 @@ pub fn solve() -> Result<()> {
 fn solve_part1(input: &str) -> Result<impl std::fmt::Display> {
     let input: Vec<&[u8]> = input.lines().map(|line| line.as_bytes()).collect();
 
-    let X = input.len();
-    let Y = input[0].len();
+    let x_max = input.len();
+    let y_max = input[0].len();
     let mut count = 0;
 
     let directions = [
@@ -28,14 +28,14 @@ fn solve_part1(input: &str) -> Result<impl std::fmt::Display> {
         (1, -1), (1, 0), (1, 1),
     ];
 
-    for x in 0..X {
-        for y in 0..Y {
+    for x in 0..x_max {
+        for y in 0..y_max {
             if input[x][y] == b'@' {
                 let mut adjacent_count = 0;
                 for (dx, dy) in &directions {
                     let nx = x as isize + dx;
                     let ny = y as isize + dy;
-                    if nx >= 0 && nx < X as isize && ny >= 0 && ny < Y as isize {
+                    if nx >= 0 && nx < x_max as isize && ny >= 0 && ny < y_max as isize {
                         if input[nx as usize][ny as usize] == b'@' {
                             adjacent_count += 1;
                         }
@@ -54,8 +54,8 @@ fn solve_part1(input: &str) -> Result<impl std::fmt::Display> {
 fn solve_part2(input: &str) -> Result<impl std::fmt::Display> {
     let mut input: Vec<Vec<u8>> = input.lines().map(|line| line.as_bytes().to_vec()).collect();
 
-    let X = input.len();
-    let Y = input[0].len();
+    let x_max = input.len();
+    let y_max = input[0].len();
     let mut count = 0;
 
     let directions = [
@@ -66,14 +66,14 @@ fn solve_part2(input: &str) -> Result<impl std::fmt::Display> {
 
     loop {
         let mut changes = false;
-        for x in 0..X {
-            for y in 0..Y {
+        for x in 0..x_max {
+            for y in 0..y_max {
                 if input[x][y] == b'@' {
                     let mut adjacent_count = 0;
                     for (dx, dy) in &directions {
                         let nx = x as isize + dx;
                         let ny = y as isize + dy;
-                        if nx >= 0 && nx < X as isize && ny >= 0 && ny < Y as isize {
+                        if nx >= 0 && nx < x_max as isize && ny >= 0 && ny < y_max as isize {
                             if input[nx as usize][ny as usize] == b'@' {
                                 adjacent_count += 1;
                             }
